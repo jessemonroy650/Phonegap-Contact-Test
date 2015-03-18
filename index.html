@@ -89,8 +89,8 @@ function onDeviceReady() {
 </body>
 <script type="text/javascript">
 function onSuccess(contacts) {
-    alert('Found ' + contacts.length + ' contacts.');
-		document.getElementById('contactInformation').innerHTML = JSON.stringify(contact)
+    //alert('Found ' + contacts.length + ' contacts.');
+	document.getElementById('contactInformation').innerHTML = JSON.stringify(contacts)
 };
 
 function onError(contactError) {
