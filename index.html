@@ -12,7 +12,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="network-info.js"></script>
     <script type="text/javascript">
-	var isVisible = false;
+	var isVisible = true;
 	function hideInfo() {
 		thePlace1 = document.getElementById('deviceInformation');
 		thePlace2 = document.getElementById('networkInformation');
@@ -49,9 +49,6 @@
 	document.addEventListener("offline", onNetworkOffline, false);
 	document.addEventListener("online", onNetworkOnline, false);
 	//
-    function onDeviceReady() {
-		getDeviceInfo();
-    }
     </script>
 </head>
 <body>
@@ -63,10 +60,10 @@
 
 <p style=clear:both; />
 
-<div id=deviceInformation class=hide>
+<div id=deviceInformation class=>
 </div>
-<hr class=hide />
-<div id=networkInformation class=hide>
+<hr />
+<div id=networkInformation class=>
 </div>
 
 <div id=contactInformation>
@@ -77,6 +74,28 @@
     <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
 </div>
 </body>
+<script type="text/javascript">
+function onSuccess(contacts) {
+    alert('Found ' + contacts.length + ' contacts.');
+};
+
+function onError(contactError) {
+    alert('onError!');
+};
+
+function onDeviceReady() {
+	getDeviceInfo();
+
+	// find all contacts with 'me' in any name field
+	var options      = new ContactFindOptions();
+	options.filter   = "me";
+	options.multiple = true;
+	options.desiredFields = [navigator.contacts.fieldType.id];
+	var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+	navigator.contacts.find(fields, onSuccess, onError, options);
+}
+
+</script>
 </html>
 
 
