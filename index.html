@@ -49,6 +49,19 @@
 	document.addEventListener("offline", onNetworkOffline, false);
 	document.addEventListener("online", onNetworkOnline, false);
 	//
+function onDeviceReady() {
+	getDeviceInfo();
+
+	// find all contacts with 'me' in any name field
+/*
+	var options      = new ContactFindOptions();
+	options.filter   = "me";
+	options.multiple = true;
+	options.desiredFields = [navigator.contacts.fieldType.id];
+	var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+	navigator.contacts.find(fields, onSuccess, onError, options);
+*/
+}
     </script>
 </head>
 <body>
@@ -83,17 +96,6 @@ function onError(contactError) {
     alert('onError!');
 };
 
-function onDeviceReady() {
-	getDeviceInfo();
-
-	// find all contacts with 'me' in any name field
-	var options      = new ContactFindOptions();
-	options.filter   = "me";
-	options.multiple = true;
-	options.desiredFields = [navigator.contacts.fieldType.id];
-	var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-	navigator.contacts.find(fields, onSuccess, onError, options);
-}
 
 </script>
 </html>
