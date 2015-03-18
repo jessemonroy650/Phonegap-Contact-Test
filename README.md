@@ -1,2 +1,2 @@
-# Phonegap-Contact-Test
-a simple test of Phonegaps's contact API
+# phonegap-contact-test
+A simple test of phonegap's Contact plugin.

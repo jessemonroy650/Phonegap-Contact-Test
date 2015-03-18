@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>PhoneGap Device Test</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="buttons.css" />
+    <style>
+        body {margin:0px;}
+    </style>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="network-info.js"></script>
+    <script type="text/javascript">
+	function updateNetworkStatus(state) {
+		document.getElementById('networkInformation').innerHTML =
+			'Network is ' + state + '<br />Using: ' + getConnectionType();
+	}
+	function getDeviceInfo() {
+		information = 'cordova' + device.cordova + "<br />" +
+						'model' + device.model + "<br />" +
+						'platform' + device.platform + "<br />" +
+						'uuid' + device.uuid + "<br />" +
+						'version' + device.version + "<br />";
+
+		document.getElementById('deviceInformation').innerHTML = information;
+	}
+
+    // Wait for PhoneGap to load
+    document.addEventListener("deviceready", onDeviceReady, false);
+	// get network state
+	document.addEventListener("offline", onNetworkOffline, false);
+	document.addEventListener("online", onNetworkOnline, false);
+	//
+    function onDeviceReady() {
+    }
+    </script>
+</head>
+<body>
+<div class="button button-block button-large"><img align=left src=favicon-48x48.png>Phonegap Device Test</div>
+<span onclick='navigator.app.exitApp()'><button class="button button-pill button-primary button-large" style="margin:1em;float:right;">Exit</button></span>
+<p style=clear:both; />
+
+<div id=deviceInformation>
+</div>
+
+<div id=networkInformation>
+</div>
+
+<div id=contactInformation>
+</div>
+
+
+<div class="copyright" style="padding:5px;align:left;font-style:italic;font-size:small;">
+    <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
+</div>
+</body>
+</html>
+
+
+
