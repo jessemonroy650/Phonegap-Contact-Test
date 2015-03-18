@@ -58,7 +58,7 @@
 		options.multiple = true;
 		//options.desiredFields = [navigator.contacts.fieldType.id];
 		var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-		navigator.contacts.find(fields, onSuccess, onError, options);
+		//navigator.contacts.find(fields, onSuccess, onError, options);
 	}
     </script>
 </head>
@@ -96,16 +96,6 @@ function onSuccess(contacts) {
 function onError(contactError) {
     alert('onError!');
 };
-
-function exitApp() {
-	if(navigator.app){
-        //navigator.app.exitApp();
-		alert('app.exitApp');
-	}else if(navigator.device){
-        //navigator.device.exitApp();
-		alert('device.exitApp');
-	}
-}
 
 </script>
 </html>
