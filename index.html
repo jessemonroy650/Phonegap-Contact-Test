@@ -18,14 +18,14 @@
 		thePlace2 = document.getElementById('networkInformation');
 		thePlace3 = document.getElementById('hideButton');
 		if (isVisible) {
-			thePlace1.classList.remove('hide');
-			thePlace2.classList.remove('hide');
-			thePlace3.innerHTML = 'hide';
-			isVisible = false;
-		} else {
 			thePlace1.classList.add('hide');
 			thePlace2.classList.add('hide');
 			thePlace3.innerHTML = 'show';
+			isVisible = false;
+		} else {
+			thePlace1.classList.remove('hide');
+			thePlace2.classList.remove('hide');
+			thePlace3.innerHTML = 'hide';
 			isVisible = true;
 		}
 	}
@@ -43,7 +43,17 @@
 		document.getElementById('deviceInformation').innerHTML = information;
 	}
 
+	function onSuccess(contacts) {
+    	//alert('Found ' + contacts.length + ' contacts.');
+		document.getElementById('contactInformation').innerHTML = JSON.stringify(contacts, null, 4);
+	};
+	//
+	function onError(contactError) {
+    	alert('onError!');
+	};
+	//
     // Wait for PhoneGap to load
+	//
     document.addEventListener("deviceready", onDeviceReady, false);
 	// get network state
 	document.addEventListener("offline", onNetworkOffline, false);
@@ -64,19 +74,19 @@
 </head>
 <body>
 <div class="button button-block button-large"><img align=left src=favicon-48x48.png>Phonegap Contact Test</div>
-<span onclick='hideInfo()'>
-	<button id=hide class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Hide</button>
+<span onclick="hideInfo()">
+	<button id=hideButton class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Hide</button>
 </span
-<span onclick='navigator.app.exitApp()'>
-	<button id=exit class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
+<span onclick="navigator.app.exitApp()">
+	<button id=exitButton class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
 </span>
 
 <p style=clear:both; />
 
-<div id=deviceInformation class=>
+<div id=deviceInformation >
 </div>
 <hr />
-<div id=networkInformation class=>
+<div id=networkInformation >
 </div>
 <hr />
 <div ><pre id=contactInformation></pre>
@@ -87,17 +97,6 @@
     <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
 </div>
 </body>
-<script type="text/javascript">
-function onSuccess(contacts) {
-    //alert('Found ' + contacts.length + ' contacts.');
-	document.getElementById('contactInformation').innerHTML = JSON.stringify(contacts, null, 4);
-};
-
-function onError(contactError) {
-    alert('onError!');
-};
-
-</script>
 </html>
 
 
