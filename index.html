@@ -90,6 +90,7 @@ function onDeviceReady() {
 <script type="text/javascript">
 function onSuccess(contacts) {
     alert('Found ' + contacts.length + ' contacts.');
+		document.getElementById('contactInformation').innerHTML = JSON.stringify(contact)
 };
 
 function onError(contactError) {
