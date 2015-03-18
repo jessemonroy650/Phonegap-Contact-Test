@@ -7,7 +7,7 @@
         <!-- versionCode is optional and Android only -->
         <preference name="phonegap-version" value="3.5.0" />
 
-        <name>Phonegap Device API test</name>
+        <name>Phonegap Contact test</name>
         <description>Simple Contact test</description>
         <author href="http://bsdmasterindex.com" email="jessemonroy650@yahoo.com">
         Jesse Monroy
