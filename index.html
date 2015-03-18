@@ -49,28 +49,26 @@
 	document.addEventListener("offline", onNetworkOffline, false);
 	document.addEventListener("online", onNetworkOnline, false);
 	//
-function onDeviceReady() {
-	getDeviceInfo();
+	function onDeviceReady() {
+		getDeviceInfo();
 
-	// find all contacts with 'me' in any name field
-	var options      = new ContactFindOptions();
-	options.filter   = "";
-	options.multiple = true;
-	//options.desiredFields = [navigator.contacts.fieldType.id];
-	var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-	navigator.contacts.find(fields, onSuccess, onError, options);
-/*
-*/
-}
+		// find all contacts with 'me' in any name field
+		var options      = new ContactFindOptions();
+		options.filter   = "";
+		options.multiple = true;
+		//options.desiredFields = [navigator.contacts.fieldType.id];
+		var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+		navigator.contacts.find(fields, onSuccess, onError, options);
+	}
     </script>
 </head>
 <body>
 <div class="button button-block button-large"><img align=left src=favicon-48x48.png>Phonegap Contact Test</div>
 <span onclick='hideInfo()'>
-	<button id=hideButton class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Show</button>
+	<button id=hide class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Hide</button>
 </span
-<span onclick='exitApp()'>
-	<button id=exitButton class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
+<span onclick='navigator.app.exitApp()'>
+	<button id=exit class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
 </span>
 
 <p style=clear:both; />
@@ -80,8 +78,8 @@ function onDeviceReady() {
 <hr />
 <div id=networkInformation class=>
 </div>
-
-<div id=contactInformation>
+<hr />
+<div ><pre id=contactInformation></pre>
 </div>
 <hr />
 
@@ -99,23 +97,6 @@ function onError(contactError) {
     alert('onError!');
 };
 
-document.addEventListener("exitButton",function(){ 
-
-    navigator.notification.confirm(
-           'Do you want to quit', 
-           onConfirmQuit, 
-           'QUIT TITLE', 
-           'OK,Cancel'  
-    );
-
-}, true);
-
-function onConfirmQuit(button){
-   if(button == "1"){
-     navigator.app.exitApp(); 
-   }
-}
-/*
 function exitApp() {
 	if(navigator.app){
         //navigator.app.exitApp();
@@ -125,7 +106,6 @@ function exitApp() {
 		alert('device.exitApp');
 	}
 }
-*/
 
 </script>
 </html>
