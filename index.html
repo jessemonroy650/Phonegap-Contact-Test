@@ -16,7 +16,7 @@
 	function hideInfo() {
 		thePlace1 = document.getElementById('deviceInformation');
 		thePlace2 = document.getElementById('networkInformation');
-		thePlace3 = document.getElementById('hide');
+		thePlace3 = document.getElementById('hideButton');
 		if (isVisible) {
 			thePlace1.classList.remove('hide');
 			thePlace2.classList.remove('hide');
@@ -67,9 +67,11 @@ function onDeviceReady() {
 <body>
 <div class="button button-block button-large"><img align=left src=favicon-48x48.png>Phonegap Contact Test</div>
 <span onclick='hideInfo()'>
-	<button id=hide class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Show</button>
+	<button id=hideButton class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Show</button>
 </span
-<span onclick='navigator.app.exitApp()'><button id=exit class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button></span>
+<span onclick='exitApp()'>
+	<button id=exit class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
+</span>
 
 <p style=clear:both; />
 
@@ -81,7 +83,7 @@ function onDeviceReady() {
 
 <div id=contactInformation>
 </div>
-
+<hr />
 
 <div class="copyright" style="padding:5px;align:left;font-style:italic;font-size:small;">
     <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
@@ -97,6 +99,15 @@ function onError(contactError) {
     alert('onError!');
 };
 
+function exitApp() {
+	if(navigator.app){
+        //navigator.app.exitApp();
+		alert('app.exitApp');
+	}else if(navigator.device){
+        //navigator.device.exitApp();
+		alert('device.exitApp');
+	}
+}
 
 </script>
 </html>
