@@ -60,6 +60,11 @@
 	document.addEventListener("online", onNetworkOnline, false);
 	//
 	function onDeviceReady() {
+		// hide Exit button. They don't have one on iOS devices.
+		if (device.platform === "iOS") {
+			//alert("got iOS");
+			$("#exitApp").addClass("hidden");
+		}
 		getDeviceInfo();
 
 		// find all contacts with 'me' in any name field
@@ -78,7 +83,7 @@
 	<button id=hideButton class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Hide</button>
 </span
 <span onclick="navigator.app.exitApp()">
-	<button id=exitButton class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
+	<button id=exitApp class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
 </span>
 
 <p style=clear:both; />
