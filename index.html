@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="buttons.css" />
     <style>
-        body {margin:0px;}
-		.hide {display:none;visibility:collapse;}
-		.show {display:block;visibility:visible;}
+	body {margin:0px;}
+	.hidden {visibility:collapse;display:none;}
+	.expose {visibility:visible;display:block;} // Here for completeness only.
     </style>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="network-info.js"></script>
@@ -18,13 +18,13 @@
 		thePlace2 = document.getElementById('networkInformation');
 		thePlace3 = document.getElementById('hideButton');
 		if (isVisible) {
-			thePlace1.classList.add('hide');
-			thePlace2.classList.add('hide');
+			thePlace1.classList.add('hidden');
+			thePlace2.classList.add('hidden');
 			thePlace3.innerHTML = 'show';
 			isVisible = false;
 		} else {
-			thePlace1.classList.remove('hide');
-			thePlace2.classList.remove('hide');
+			thePlace1.classList.remove('hidden');
+			thePlace2.classList.remove('hidden');
 			thePlace3.innerHTML = 'hide';
 			isVisible = true;
 		}
