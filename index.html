@@ -5,92 +5,88 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="buttons.css" />
     <style>
-	body {margin:0px;}
-	.hidden {visibility:collapse;display:none;}
-	.expose {visibility:visible;display:block;} // Here for completeness only.
+    body {margin:0px;}
+    .hidden {visibility:collapse;display:none;}
+    .expose {visibility:visible;display:block;} /* Here for completeness only. */
+    #header {margin:0;padding:0;}
+    #exitApp {margin:0.1em;float:right;}
     </style>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8" src="network-info.js"></script>
+    <script type="text/javascript" charset="utf-8" src="fastclick.js"></script>
     <script type="text/javascript">
-	var isVisible = true;
-	function hideInfo() {
-		thePlace1 = document.getElementById('deviceInformation');
-		thePlace2 = document.getElementById('networkInformation');
-		thePlace3 = document.getElementById('hideButton');
-		if (isVisible) {
-			thePlace1.classList.add('hidden');
-			thePlace2.classList.add('hidden');
-			thePlace3.innerHTML = 'show';
-			isVisible = false;
-		} else {
-			thePlace1.classList.remove('hidden');
-			thePlace2.classList.remove('hidden');
-			thePlace3.innerHTML = 'hide';
-			isVisible = true;
-		}
-	}
-	function updateNetworkStatus(state) {
-		document.getElementById('networkInformation').innerHTML =
-			'Network is ' + state + '<br />Using: ' + getConnectionType();
-	}
-	function getDeviceInfo() {
-		information = 'cordova: ' + device.cordova + "<br />" +
-						'model: ' + device.model + "<br />" +
-						'platform: ' + device.platform + "<br />" +
-						'uuid: ' + device.uuid + "<br />" +
-						'version: ' + device.version + "<br />";
+    var isVisible = true;
+    function hideInfo() {
+        thePlace1 = document.getElementById('deviceInformation');
+        thePlace3 = document.getElementById('hideButton');
+        if (isVisible) {
+            thePlace1.classList.add('hidden');
+            thePlace3.innerHTML = 'show';
+            isVisible = false;
+        } else {
+            thePlace1.classList.remove('hidden');
+            thePlace3.innerHTML = 'hide';
+            isVisible = true;
+        }
+    }
+    function getDeviceInfo() {
+        information = 'cordova: ' + device.cordova + "<br />" +
+                        'model: ' + device.model + "<br />" +
+                        'platform: ' + device.platform + "<br />" +
+                        'uuid: ' + device.uuid + "<br />" +
+                        'version: ' + device.version + "<br />";
 
-		document.getElementById('deviceInformation').innerHTML = information;
-	}
+        document.getElementById('deviceInformation').innerHTML = information;
+    }
 
-	function onSuccess(contacts) {
-    	//alert('Found ' + contacts.length + ' contacts.');
-		document.getElementById('contactInformation').innerHTML = JSON.stringify(contacts, null, 4);
-	};
-	//
-	function onError(contactError) {
-    	alert('onError!');
-	};
-	//
+    function onSuccess(contacts) {
+        //alert('Found ' + contacts.length + ' contacts.');
+        document.getElementById('contactInformation').innerHTML = JSON.stringify(contacts, null, 4);
+    };
+    //
+    function onError(contactError) {
+        alert('onError!');
+    };
+    //
     // Wait for PhoneGap to load
-	//
+    //
     document.addEventListener("deviceready", onDeviceReady, false);
-	// get network state
-	document.addEventListener("offline", onNetworkOffline, false);
-	document.addEventListener("online", onNetworkOnline, false);
-	//
-	function onDeviceReady() {
-		// hide Exit button. They don't have one on iOS devices.
-		if (device.platform === "iOS") {
-			//alert("got iOS");
-			// http://www.mzcart.com/javascript-how-to-addremove-css-class-from-a-dom-element/
-			document.getElementById('exitApp').classList.add("hidden");
-		}
-		getDeviceInfo();
+    // Get rid of 300ms delay 
+    document.addEventListener('DOMContentLoaded', function() { FastClick.attach(document.body); }, false);
+    //
+    function onDeviceReady() {
+        if (device.platform === "iOS") {
+            //alert("got iOS");
+            // hide Exit button. They don't have one on iOS devices.
+            // http://www.mzcart.com/javascript-how-to-addremove-css-class-from-a-dom-element/
+            document.getElementById('exitApp').classList.add("hidden");
+            /* deals with post-iOS-7 change that covers the status bar */
+            /* http://coenraets.org/blog/2013/09/phonegap-and-cordova-with-ios-7/ */
+            document.body.style.marginTop = "20px";
+        }
+        getDeviceInfo();
 
-		// find all contacts with 'me' in any name field
-		var options      = new ContactFindOptions();
-		options.filter   = "";
-		options.multiple = true;
-		//options.desiredFields = [navigator.contacts.fieldType.id];
-		var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-		navigator.contacts.find(fields, onSuccess, onError, options);
-	}
+        // find all contacts with 'me' in any name field
+        var options      = new ContactFindOptions();
+        options.filter   = "";
+        options.multiple = true;
+        //options.desiredFields = [navigator.contacts.fieldType.id];
+        var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+        navigator.contacts.find(fields, onSuccess, onError, options);
+    }
     </script>
 </head>
 <body>
-<div class="button button-block button-large"><img align=left src=favicon-48x48.png>Phonegap Contact Test</div>
+<div id=header class="button button-block button-large">
+    <img align=left src=favicon-48x48.png>
+    Phonegap Contact Test
+    <button id=exitApp onclick="navigator.app.exitApp()" class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
+</div>
 
 <button id=hideButton onclick="hideInfo()" class="button button-pill button-primary button-medium" style="margin:1em;float:left;">Hide</button>
-
-<button id=exitApp onclick="navigator.app.exitApp()" class="button button-pill button-primary button-medium" style="margin:1em;float:right;">Exit</button>
 
 <p style=clear:both; />
 
 <div id=deviceInformation >
-</div>
-<hr />
-<div id=networkInformation >
 </div>
 <hr />
 <div ><pre id=contactInformation></pre>
@@ -102,6 +98,3 @@
 </div>
 </body>
 </html>
-
-
-
