@@ -1,0 +1,8 @@
+body {margin:0px;}
+.hidden {visibility:collapse;display:none;}
+.expose {visibility:visible;display:block;} /* Here for completeness only. */
+.clearBoth {clear:both;}
+.copyright {padding:5px;align:left;font-style:italic;font-size:small;}
+#hideButton {margin:1em;float:left;}
+#header {margin:0;padding:0;}
+#exitApp {margin:0;float:right;}
